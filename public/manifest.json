@@ -1,0 +1,8 @@
+{
+  "short_name": "Crown Clothing",
+  "name": "Crown Clothing",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
