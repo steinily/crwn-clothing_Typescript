@@ -7,8 +7,12 @@ import ProductCard from '../../components/productcard/product-card.component'
 import { selectCategoriesMap , selectCategoriesIsLoading } from '../../store/categories/category.selector'
 import Spinner from '../../components/spinner/spinner.component'
 
+type CategoryRouteParams = {
+    category: string;
+}
+
 const Category = () => {
-    const { category } = useParams();
+    const { category } = useParams<keyof CategoryRouteParams>() as CategoryRouteParams ;
     const CategoriesMap = useSelector(selectCategoriesMap)
     const isLoading = useSelector(selectCategoriesIsLoading)
     //const { CategoriesMap } = useContext(CategoriesContext);

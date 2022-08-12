@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState  , FormEvent, ChangeEvent} from "react";
 import FormInput from "../form-imput/form-input.component";
 import '../../components/sign-in-form/sign-in-form.styles.scss'
 import Button ,{BUTTON_TYPES_CLASSES }from "../button/button.component";
 import { useDispatch } from "react-redux";
 import { emailSignInStart, googleSingInStart } from "../../store/user/user.action";
-
+import { AuthError} from "firebase/auth";
 
 const defaultformFields ={
     email: '',
@@ -29,7 +29,7 @@ const SingInForm = () => {
         
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event : FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try{
             // eslint-disable-next-line
@@ -37,8 +37,8 @@ const SingInForm = () => {
             
             resetFormFields();
         }catch(error){
-            switch(error.code){
-                case 'auth/wrong-password':
+            switch((error as AuthError).code){
+                case 'auth/wrong-password': 
                     alert('Incorect Email or password')
                     break;
                 case 'auth/user-not-found':
@@ -52,7 +52,7 @@ const SingInForm = () => {
 
     }
 
-    const handleChange= (event) => {
+    const handleChange= (event : ChangeEvent<HTMLInputElement>) => {
         const {name , value} = event.target;
     setFormFields({...formFields,[name]: value})
     };
